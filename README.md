@@ -63,12 +63,14 @@ FDCS is a modular imaging system composed of four main subsystems:
 The system design is informed by simplified physics models including:
 
 - blackbody radiation from plasma-facing surfaces
-- radiative heat flux estimates for tungsten and lithium-based materials
+- radiative heat flux estimates for tungsten, graphite, molybdenum and lithium-based materials
 - photon transport through optical viewport systems
 - signal-to-noise considerations under radiation-induced sensor noise
 - basic thermal response modeling of surface components
 
 These models are implemented in Python to provide order-of-magnitude design constraints and to guide subsystem tradeoffs.
+
+![Heat balance during plasma pulse](/figures/heat_balance_during_plasma_pulse.png)
 
 ---
 
