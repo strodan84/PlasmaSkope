@@ -135,23 +135,70 @@ def steady_state_temperature(q_in, emissivity=0.3):
     return (q_in / (emissivity * sigma)) ** 0.25
 
 
-def demo_heat_pulse():
+# def demo_heat_pulse():
+#     """
+#     Generate a simple fusion-relevant heat pulse scenario.
+
+#     Example:
+#     - plasma shot lasting ~1 second
+#     - Gaussian-like heat flux profile
+
+    
+#     """
+
+#     t = np.linspace(0, 2.0, 1000) 
+
+#     q_peak = 5e6  # 5 MW/m^2 (typical divertor scale)
+#     q_in = q_peak * np.exp(-((t - 0.5)**2) / 0.02)
+
+#     T0 = 500  # initial wall temperature (K)
+
+#     results = surface_energy_balance(q_in, T0, t)
+
+#     return {
+#         "t": t,
+#         "q_in": q_in,
+#         "T": results["T"],
+#         "q_rad": results["q_rad"],
+#         "q_cond": results["q_cond"]
+#     }
+
+
+def demo_heat_pulse(
+    duration=5.0,
+    dt=0.005,
+    q_peak=5e6,
+    pulse_center=None,
+    pulse_width=0.5
+):
     """
-    Generate a simple fusion-relevant heat pulse scenario.
-
-    Example:
-    - plasma shot lasting ~1 second
-    - Gaussian-like heat flux profile
-
+    Generate a Gaussian plasma heat pulse.
     NSTX-U: plasma pulses are typically 1-5 seconds (historically around 1-2 s, with longer pulses as operating goals increase).
+
+    Parameters
+    ----------
+    duration : float
+        Total simulation time (s)
+    dt : float
+        Time step (s)
+    q_peak : float
+        Peak heat flux (W/m²)
+    pulse_center : float
+        Center of Gaussian pulse (s)
+    pulse_width : float
+        Standard deviation of pulse (s)
     """
 
-    t = np.linspace(0, 2.0, 1000) 
+    if pulse_center is None:
+        pulse_center = duration / 2
 
-    q_peak = 5e6  # 5 MW/m^2 (typical divertor scale)
-    q_in = q_peak * np.exp(-((t - 0.5)**2) / 0.02)
+    t = np.arange(0, duration + dt, dt)
 
-    T0 = 500  # initial wall temperature (K)
+    q_in = q_peak * np.exp(
+        -((t - pulse_center) ** 2) / (2 * pulse_width**2)
+    )
+
+    T0 = 500
 
     results = surface_energy_balance(q_in, T0, t)
 
@@ -160,5 +207,5 @@ def demo_heat_pulse():
         "q_in": q_in,
         "T": results["T"],
         "q_rad": results["q_rad"],
-        "q_cond": results["q_cond"]
+        "q_cond": results["q_cond"],
     }
