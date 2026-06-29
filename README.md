@@ -9,7 +9,7 @@ The goal of this project is to explore the end-to-end design considerations of a
 This project is not tied to a specific experimental implementation, but is intended as a physics-informed systems design exercise bridging experimental condensed matter physics, detector instrumentation, and fusion diagnostics.
 
 
-<img src="/figures/heat_flux_to_digital_image_flow.png" width="200"/>
+<img src="/figures/heat_flux_to_digital_image_flow.png"  width="600"/>
 
 ---
 
@@ -73,7 +73,7 @@ The system design is informed by simplified physics models including:
 
 These models are implemented in Python to provide order-of-magnitude design constraints and to guide subsystem tradeoffs.
 
-![Heat balance during plasma pulse](/figures/heat_balance_during_plasma_pulse.png)
+<img src="/figures/heat_balance_during_5-sec_plasma_pulse.png"  width="700"/>
 
 ---
 
@@ -110,6 +110,9 @@ This is an evolving conceptual design study. Current work focuses on:
 - subsystem architecture definition
 - optical signal chain estimation
 - synthetic event simulation for validation of detection concepts
+
+<img src="/figures/plasma_camera_signal_chain.png"  width="800"/>
+
 
 
  
